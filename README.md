@@ -42,4 +42,4 @@ Mirror do Padlet do grupo de pesquisa **Sociologia Digital e Inteligência Artif
 
 ---
 
-*Extraído automaticamente via Hermes Bot em julho de 2026.*
+*Extraído automaticamente via Agente de IA do LABHDUFBA em julho de 2026.*
