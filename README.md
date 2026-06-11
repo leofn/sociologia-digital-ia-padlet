@@ -23,23 +23,26 @@ Mirror do Padlet do grupo de pesquisa **Sociologia Digital e Inteligência Artif
 
 ## Estrutura
 
-- `secoes/` — Um arquivo `.md` por seção do Padlet, com todos os textos, links e referências
-- `arquivos/` — Arquivos baixados (PDFs, PPTXs, DOCXs etc.), organizados por seção
+- `secoes/` — Um arquivo `.md` por seção do Padlet, com textos, links e referências
 - `links.md` — Lista consolidada de todos os links e arquivos encontrados
 - `dados/padlet_raw_data.json` — Dados brutos da API do Padlet (JSON)
+- `scripts/padlet_mirror.py` — Script de sincronização automática
+- `.github/workflows/padlet-mirror.yml` — GitHub Action (sexta-feira 02:00 BRT)
 
-## Arquivos por seção
+## Arquivos baixados
 
-| Seção | Arquivos |
-|---|---|
-| Textos Obrigatórios 2026 | 14 |
-| Textos obrigatórios 2025 | 6 |
-| Textos Obrigatórios (2023-2024) | 11 |
-| Textos Obrigatórios (2019-2022) | 28 |
-| Textos Complementares | 14 |
-| PPTs das apresentações | 41 |
-| Leituras futuras | 3 |
+| Pasta | Arquivos | Tamanho |
+|---|---|---|
+| `arquivos/textos-obrigatorios-2026/` | 14 | 7,2 MB |
+| `arquivos/textos-obrigatorios-2025/` | 6 | 11 MB |
+| `arquivos/textos-obrigatorios-2023-2024/` | 11 | 39 MB |
+| `arquivos/textos-obrigatorios-2019-2022/` | 28 | 82 MB |
+| `arquivos/textos-complementares/` | 14 | 40 MB |
+| `arquivos/ppts-das-apresentacoes/` | 41 | 126 MB |
+| `arquivos/leituras-futuras/` | 3 | 2,8 MB |
+
+**Total:** 117 arquivos, 305 MB (PDFs, PPTXs, DOCXs, EPUB, ODT)
 
 ---
 
-*Extraído automaticamente via Agente de IA do LABHDUFBA em julho de 2026.*
+*Atualizado automaticamente via GitHub Actions. Última sincronização: julho 2026.*
