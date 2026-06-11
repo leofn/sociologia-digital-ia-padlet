@@ -24,6 +24,7 @@ Mirror do Padlet do grupo de pesquisa **Sociologia Digital e Inteligência Artif
 ## Estrutura
 
 - `secoes/` — Um arquivo `.md` por seção do Padlet, com textos, links e referências
+- `arquivos/` — Arquivos baixados (PDFs, PPTXs, DOCXs etc.), organizados por seção
 - `links.md` — Lista consolidada de todos os links e arquivos encontrados
 - `dados/padlet_raw_data.json` — Dados brutos da API do Padlet (JSON)
 - `scripts/padlet_mirror.py` — Script de sincronização automática
@@ -35,13 +36,13 @@ Mirror do Padlet do grupo de pesquisa **Sociologia Digital e Inteligência Artif
 |---|---|---|
 | `arquivos/textos-obrigatorios-2026/` | 14 | 7,2 MB |
 | `arquivos/textos-obrigatorios-2025/` | 6 | 11 MB |
-| `arquivos/textos-obrigatorios-2023-2024/` | 11 | 39 MB |
+| `arquivos/textos-obrigatorios-2023-2024/` | 7 | 29 MB |
 | `arquivos/textos-obrigatorios-2019-2022/` | 28 | 82 MB |
 | `arquivos/textos-complementares/` | 14 | 40 MB |
-| `arquivos/ppts-das-apresentacoes/` | 41 | 126 MB |
+| `arquivos/ppts-das-apresentacoes/` | 45 | 131 MB |
 | `arquivos/leituras-futuras/` | 3 | 2,8 MB |
 
-**Total:** 117 arquivos, 305 MB (PDFs, PPTXs, DOCXs, EPUB, ODT)
+**Total:** 117 arquivos, 305 MB (111 PDFs, 3 PPTXs, 1 DOCX, 1 ODT, 1 EPUB)
 
 ---
 
