@@ -358,7 +358,7 @@ def update_readme(total_wishes):
         "# Sociologia Digital e Inteligência Artificial\n",
         f"Mirror do Padlet do grupo de pesquisa **Sociologia Digital e Inteligência Artificial**, organizado por Marcus Repa.\n",
         f"**Fonte original:** https://padlet.com/marcusrepa/sociologia-digital-e-inteligencia-artificial-cfn1emqp0om5xwr\n",
-        f"**Total de posts:** {total_wishes} | **Seções:** {len(SECTION_MAP)}\n",
+        f"**Total de posts:** {len(total_wishes)} | **Seções:** {len(SECTION_MAP)}\n",
         "---\n\n## Sumário\n",
     ]
 
@@ -435,7 +435,7 @@ def main():
 
     # 8. Update README
     print("\n8. Atualizando README.md...")
-    readme = update_readme(len(new_wishes))
+    readme = update_readme(new_wishes)
     with open(REPO_DIR / "README.md", "w", encoding="utf-8") as f:
         f.write(readme)
 
