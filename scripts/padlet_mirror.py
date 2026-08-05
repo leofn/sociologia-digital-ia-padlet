@@ -344,21 +344,23 @@ def generate_links_md(all_wishes):
     return "\n".join(lines)
 
 
-def update_readme(total_wishes):
+def update_readme(all_wishes):
     """Atualiza o README."""
     section_counts = {}
     for sid, sname, _ in SECTION_ORDER:
         section_counts[sname] = 0
-    for w in total_wishes:
+    for w in all_wishes:
         sid = w.get("attributes", {}).get("wall_section_id")
         sname = SECTION_MAP.get(sid, "Unknown")
         section_counts[sname] = section_counts.get(sname, 0) + 1
+
+    total_count = len(all_wishes)
 
     lines = [
         "# Sociologia Digital e Inteligência Artificial\n",
         f"Mirror do Padlet do grupo de pesquisa **Sociologia Digital e Inteligência Artificial**, organizado por Marcus Repa.\n",
         f"**Fonte original:** https://padlet.com/marcusrepa/sociologia-digital-e-inteligencia-artificial-cfn1emqp0om5xwr\n",
-        f"**Total de posts:** {total_wishes} | **Seções:** {len(SECTION_MAP)}\n",
+        f"**Total de posts:** {total_count} | **Seções:** {len(SECTION_MAP)}\n",
         "---\n\n## Sumário\n",
     ]
 
@@ -435,7 +437,7 @@ def main():
 
     # 8. Update README
     print("\n8. Atualizando README.md...")
-    readme = update_readme(len(new_wishes))
+    readme = update_readme(new_wishes)
     with open(REPO_DIR / "README.md", "w", encoding="utf-8") as f:
         f.write(readme)
 
