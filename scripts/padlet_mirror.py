@@ -366,7 +366,7 @@ def update_readme(all_wishes):
 
     for sid, sname, num in SECTION_ORDER:
         count = section_counts.get(sname, 0)
-        lines.append(f"{num}. [{sname}](secoes/{num}-{re.sub(r'[^a-z0-9]+', '-', sname.lower()).strip('-')}.md) — {count} posts")
+        lines.append(f"{num}. [{sname}](secoes/{num}-{re.sub(r'[^a-z0-9à-ú]+', '-', sname.lower()).strip('-')}.md) — {count} posts")
 
     lines.append("\n---\n\n## Estrutura\n")
     lines.append("- `secoes/` — Um arquivo `.md` por seção do Padlet")
@@ -447,7 +447,8 @@ def main():
     print("\n6. Regenerando markdowns das seções...")
     SECOES_DIR.mkdir(parents=True, exist_ok=True)
     for sid, sname, num in SECTION_ORDER:
-        safe_name = re.sub(r"[^a-z0-9]+", "-", sname.lower()).strip("-")
+        # Preserve UTF-8 characters (ã, ç, é, etc) in filenames
+        safe_name = re.sub(r"[^a-z0-9à-ú]+", "-", sname.lower()).strip("-")
         md = generate_section_md(merged_wishes, sid, sname, num)
         out_path = SECOES_DIR / f"{num}-{safe_name}.md"
         with open(out_path, "w", encoding="utf-8") as f:
