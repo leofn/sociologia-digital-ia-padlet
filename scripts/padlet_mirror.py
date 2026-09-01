@@ -69,14 +69,10 @@ def fetch_all_wishes():
         all_wishes.extend(wishes)
         print(f"  → {len(wishes)} wishes na página {page}")
 
-        # Padlet API uses next_cursor (not meta.next_page)
-        next_cursor = data.get("next_cursor")
-        if not next_cursor:
-            # Fallback: check meta.next_page for older API versions
-            next_cursor = data.get("meta", {}).get("next_page")
-        if not next_cursor:
+        next_page = data.get("meta", {}).get("next_page")
+        if not next_page:
             break
-        page_start = next_cursor
+        page_start = next_page
         page += 1
         if page > 20:  # safety limit
             break
