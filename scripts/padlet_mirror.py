@@ -399,7 +399,33 @@ def main():
 
     # 3. Compare
     print("\n3. Comparando mudanças...")
+    # IMPORTANT: Padlet API may return fewer posts than we have (limit of 100).
+    # Merge: keep all existing posts, add new ones, update edited ones.
+    # Only mark as "removed" if the post ID is NOT in our existing data AND
+    # the API returned fewer posts than our saved data (i.e., it's an API limit, not a real removal).
     added, removed, edited = find_changes(existing_wishes, new_wishes)
+
+    # If API returned fewer posts than we have, don't treat missing as removed
+    if len(new_wishes) < len(existing_wishes):
+        print(f"   ⚠️ API retornou {len(new_wishes)} posts mas temos {len(existing_wishes)} salvos.")
+        print(f"   Provável limite da API. Preservando posts antigos.")
+        removed = []  # Don't remove — just preserve
+
+    # Merge: existing posts (preserved) + new posts
+    existing_map = {w["id"]: w for w in existing_wishes}
+    new_map = {w["id"]: w for w in new_wishes}
+
+    # Update existing with edited versions
+    for wid in new_map:
+        if wid in existing_map:
+            existing_map[wid] = new_map[wid]  # Update with latest version
+
+    # Add new posts
+    for w in added:
+        existing_map[w["id"]] = w
+
+    merged_wishes = list(existing_map.values())
+    print(f"   Após merge: {len(merged_wishes)} posts total")
     print(f"   Novos: {len(added)} | Removidos: {len(removed)} | Editados: {len(edited)}")
 
     if not added and not removed and not edited:
@@ -415,29 +441,29 @@ def main():
     print("\n5. Salvando dados brutos...")
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     with open(RAW_DATA_PATH, "w", encoding="utf-8") as f:
-        json.dump(new_wishes, f, ensure_ascii=False, indent=2)
+        json.dump(merged_wishes, f, ensure_ascii=False, indent=2)
 
     # 6. Regenerate section markdowns
     print("\n6. Regenerando markdowns das seções...")
     SECOES_DIR.mkdir(parents=True, exist_ok=True)
     for sid, sname, num in SECTION_ORDER:
         safe_name = re.sub(r"[^a-z0-9]+", "-", sname.lower()).strip("-")
-        md = generate_section_md(new_wishes, sid, sname, num)
+        md = generate_section_md(merged_wishes, sid, sname, num)
         out_path = SECOES_DIR / f"{num}-{safe_name}.md"
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(md)
-        section_wishes = [w for w in new_wishes if w.get("attributes", {}).get("wall_section_id") == sid]
+        section_wishes = [w for w in merged_wishes if w.get("attributes", {}).get("wall_section_id") == sid]
         print(f"   {num}-{safe_name}.md — {len(section_wishes)} posts")
 
     # 7. Update links.md
     print("\n7. Atualizando links.md...")
-    links_md = generate_links_md(new_wishes)
+    links_md = generate_links_md(merged_wishes)
     with open(REPO_DIR / "links.md", "w", encoding="utf-8") as f:
         f.write(links_md)
 
     # 8. Update README
     print("\n8. Atualizando README.md...")
-    readme = update_readme(new_wishes)
+    readme = update_readme(merged_wishes)
     with open(REPO_DIR / "README.md", "w", encoding="utf-8") as f:
         f.write(readme)
 
